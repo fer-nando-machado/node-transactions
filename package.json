@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/fer-nando-machado/node-transactions/issues"
   },
-  "homepage": "https://github.com/fer-nando-machado/node-transactions#readme"
+  "homepage": "https://github.com/fer-nando-machado/node-transactions#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
 }
