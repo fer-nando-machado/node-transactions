@@ -2,9 +2,8 @@ import express from "express";
 import accountRouter from "./account";
 import transactionRouter from "./transaction";
 
+const port = process.env.PORT || 3000;
 const app = express();
-const port = 3000;
-
 app.use(express.json());
 app.use("/", accountRouter);
 app.use("/", transactionRouter);
