@@ -4,7 +4,7 @@ import { getAccountById, createAccount, Account } from "../core/account";
 
 const accountRouter = Router();
 
-accountRouter.get("/accounts/:accountId", (req: Request, res: Response) => {
+accountRouter.get("/account/:accountId", (req: Request, res: Response) => {
   const accountId = parseInt(req.params.accountId, 10);
   try {
     const account = getAccountById(accountId);
@@ -14,7 +14,7 @@ accountRouter.get("/accounts/:accountId", (req: Request, res: Response) => {
   }
 });
 
-accountRouter.post("/accounts", (req: Request, res: Response) => {
+accountRouter.post("/account", (req: Request, res: Response) => {
   try {
     const account = createAccount({ ...req.body });
     res.status(201).json(account);

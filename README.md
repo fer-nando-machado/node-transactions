@@ -14,7 +14,7 @@ Executes all available tests.
 
 ## Endpoints
 
-#### `GET /accounts/:id`
+#### `GET /account/:id`
 
 Searches for an account with the provided `:id`.
 
@@ -25,7 +25,7 @@ Searches for an account with the provided `:id`.
         "documentNumber": "12345678900"
     }
 
-#### `POST /accounts`
+#### `POST /account`
 
 Creates an account with the provided attributes.
 
@@ -42,7 +42,7 @@ Creates an account with the provided attributes.
         "documentNumber": "12345678900"
     }
 
-#### `POST /transactions`
+#### `POST /transaction`
 
 Creates a transaction with the provided attributes.
 
