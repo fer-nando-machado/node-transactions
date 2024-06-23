@@ -1,10 +1,17 @@
 import { Account, createAccount, getAccountById } from "./account";
 import { accountData } from "../data/account";
+import { transactionData } from "../data/transaction";
 
 jest.mock("../data/account", () => ({
   accountData: {
     getAccountById: jest.fn(),
     createAccount: jest.fn(),
+  },
+}));
+
+jest.mock("../data/transaction", () => ({
+  transactionData: {
+    getTransactionsByAccountId: jest.fn(),
   },
 }));
 
@@ -16,10 +23,29 @@ describe("getAccountById", () => {
   it("should return account when account exists", () => {
     const mockAccount: Account = { id: 1, documentNumber: "12345678900" };
     (accountData.getAccountById as jest.Mock).mockReturnValueOnce(mockAccount);
+    (
+      transactionData.getTransactionsByAccountId as jest.Mock
+    ).mockReturnValueOnce([
+      {
+        id: 1,
+        accountId: 1,
+        amount: 100,
+      },
+      {
+        id: 2,
+        accountId: 1,
+        amount: -200,
+      },
+      {
+        id: 3,
+        accountId: 1,
+        amount: 150,
+      },
+    ]);
 
     const account = getAccountById(1);
-
     expect(account).toEqual(mockAccount);
+    expect(account.balance).toEqual(50);
     expect(accountData.getAccountById).toHaveBeenCalledWith(1);
   });
 
