@@ -5,7 +5,7 @@ export interface Account {
   documentNumber: string;
 }
 
-export const getAccountById = (id: number) => {
+export const getAccountById = (id: number): Account => {
   const account = accountData.getAccountById(id);
   if (!account) {
     throw new Error("Account not found");
@@ -13,7 +13,7 @@ export const getAccountById = (id: number) => {
   return account;
 };
 
-export const createAccount = (account: Account) => {
+export const createAccount = (account: Account): Account => {
   if (!account.documentNumber) {
     throw new Error("Account could not be created due to missing document");
   }
