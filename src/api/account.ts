@@ -1,6 +1,6 @@
 // src/api/account.ts
 import { Router, Request, Response } from "express";
-import { getAccountById } from "../core/account";
+import { getAccountById, createAccount, Account } from "../core/account";
 
 const accountRouter = Router();
 
@@ -11,6 +11,15 @@ accountRouter.get("/accounts/:accountId", (req: Request, res: Response) => {
     res.json(account);
   } catch (error: any) {
     res.status(404).json({ error: error.message });
+  }
+});
+
+accountRouter.post("/accounts", (req: Request, res: Response) => {
+  try {
+    const account = createAccount({ ...req.body });
+    res.status(201).json(account);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
   }
 });
 

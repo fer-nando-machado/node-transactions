@@ -1,9 +1,10 @@
-import { getAccountById } from "./account";
+import { Account, createAccount, getAccountById } from "./account";
 import { accountData } from "../data/account";
 
 jest.mock("../data/account", () => ({
   accountData: {
     getAccountById: jest.fn(),
+    createAccount: jest.fn(),
   },
 }));
 
@@ -13,12 +14,12 @@ describe("getAccountById", () => {
   });
 
   it("should return account when account exists", () => {
-    const mockAccount = { account_id: 1, document_number: "12345678900" };
+    const mockAccount = { id: 1, documentNumber: "12345678900" };
     (accountData.getAccountById as jest.Mock).mockReturnValueOnce(mockAccount);
 
-    const result = getAccountById(1);
+    const account = getAccountById(1);
 
-    expect(result).toEqual(mockAccount);
+    expect(account).toEqual(mockAccount);
     expect(accountData.getAccountById).toHaveBeenCalledWith(1);
   });
 
@@ -28,5 +29,32 @@ describe("getAccountById", () => {
     expect(() => {
       getAccountById(0);
     }).toThrow("Account not found");
+  });
+});
+
+describe("createAccount", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("should throw an error if documentNumber is missing", () => {
+    const account = { documentNumber: "" };
+
+    expect(() => {
+      createAccount(account);
+    }).toThrowError("Account could not be created due to missing document");
+    expect(accountData.createAccount).not.toHaveBeenCalled();
+  });
+
+  it("should create an account and assign an id", () => {
+    const account = { documentNumber: "12345678900" };
+    const expectedAccount = { id: 1, ...account };
+    (accountData.createAccount as jest.Mock).mockReturnValueOnce(
+      expectedAccount
+    );
+
+    const createdAccount = createAccount(account);
+    expect(createdAccount).toEqual(expectedAccount);
+    expect(accountData.createAccount).toHaveBeenCalledWith(account);
   });
 });
