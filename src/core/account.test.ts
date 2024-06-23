@@ -14,7 +14,7 @@ describe("getAccountById", () => {
   });
 
   it("should return account when account exists", () => {
-    const mockAccount = { id: 1, documentNumber: "12345678900" };
+    const mockAccount: Account = { id: 1, documentNumber: "12345678900" };
     (accountData.getAccountById as jest.Mock).mockReturnValueOnce(mockAccount);
 
     const account = getAccountById(1);
@@ -38,7 +38,7 @@ describe("createAccount", () => {
   });
 
   it("should throw an error if documentNumber is missing", () => {
-    const account = { documentNumber: "" };
+    const account: Account = { documentNumber: "" };
 
     expect(() => {
       createAccount(account);
@@ -47,8 +47,8 @@ describe("createAccount", () => {
   });
 
   it("should create an account and assign an id", () => {
-    const account = { documentNumber: "12345678900" };
-    const expectedAccount = { id: 1, ...account };
+    const account: Account = { documentNumber: "12345678900" };
+    const expectedAccount: Account = { id: 1, ...account };
     (accountData.createAccount as jest.Mock).mockReturnValueOnce(
       expectedAccount
     );
