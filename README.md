@@ -4,6 +4,10 @@ Sample API for financial transaction management written in Node on an implementa
 
 ## Commands
 
+### `npm install`
+
+Installs application dependencies.
+
 ### `npm start`
 
 Starts the server application locally on port `3000`.
