@@ -12,9 +12,6 @@ Executes all available tests.
 
 ## Endpoints
 
-#### `GET /healthcheck` 
-Responds with status code `200` if the server is running.
-
 #### `POST /accounts` 
 Creates an account with the provided attributes.
 ###### request 
