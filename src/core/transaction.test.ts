@@ -29,7 +29,9 @@ describe("createTransaction", () => {
 
   it("should throw an error if account does not exist", () => {
     const transaction: Transaction = { accountId: 1, amount: 100 };
-    (getAccountById as jest.Mock).mockReturnValueOnce(undefined);
+    (getAccountById as jest.Mock).mockImplementation(() => {
+      throw new Error("Account not found");
+    });
 
     expect(() => {
       createTransaction(transaction);

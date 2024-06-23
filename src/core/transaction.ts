@@ -12,9 +12,13 @@ export const createTransaction = (transaction: Transaction): Transaction => {
   if (!transaction.amount) {
     throw new Error("Transaction could not be created due to missing amount");
   }
-  if (!getAccountById(transaction.accountId)) {
+
+  try {
+    getAccountById(transaction.accountId);
+  } catch (error: any) {
     throw new Error("Transaction could not be created due to missing account");
   }
+
   transaction.date = new Date().toISOString();
   return transactionData.createTransaction(transaction);
 };
