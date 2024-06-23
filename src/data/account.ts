@@ -2,11 +2,11 @@ import { Account } from "../core/account";
 
 class AccountData {
   private accounts: Account[];
-  private nextId: number;
+  private currentId: number;
 
   constructor() {
     this.accounts = [];
-    this.nextId = 0;
+    this.currentId = 0;
   }
 
   public getAccountById(id: number): Account | undefined {
@@ -14,7 +14,7 @@ class AccountData {
   }
 
   public createAccount(account: Account): Account {
-    account.id = ++this.nextId;
+    account.id = ++this.currentId;
     this.accounts.push(account);
     return account;
   }

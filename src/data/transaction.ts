@@ -2,11 +2,11 @@ import { Transaction } from "../core/transaction";
 
 class TransactionData {
   private transactions: Transaction[];
-  private nextId: number;
+  private currentId: number;
 
   constructor() {
     this.transactions = [];
-    this.nextId = 0;
+    this.currentId = 0;
   }
 
   public getTransactionsByAccountId(accountId: number): Transaction[] {
@@ -14,7 +14,7 @@ class TransactionData {
   }
 
   public createTransaction(transaction: Transaction): Transaction {
-    transaction.id = ++this.nextId;
+    transaction.id = ++this.currentId;
     this.transactions.push(transaction);
     return transaction;
   }

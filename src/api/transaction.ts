@@ -1,4 +1,3 @@
-// src/api/account.ts
 import { Router, Request, Response } from "express";
 import { createTransaction } from "../core/transaction";
 
