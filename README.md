@@ -23,6 +23,7 @@ Searches for an account with the provided `:id`.
     {
         "id": 1,
         "documentNumber": "12345678900"
+        "balance": 123.45
     }
 
 #### `POST /account`
@@ -49,17 +50,15 @@ Creates a transaction with the provided attributes.
 ###### request
 
     {
-        "account_id": 1,
-        "operation_type_id": 4,
+        "accountId": 1,
         "amount": 123.45
     }
 
 ###### response
 
     {
-        "transaction_id": 1,
-        "account_id": 1,
-        "operation_type_id": 4,
+        "id": 1,
+        "accountId": 1,
         "amount": 123.45,
-        "event_date": "2020-01-05T09:34:18.5893223"
+        "date": "2024-07-12T13:13:13.777Z",
     }

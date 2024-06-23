@@ -1,6 +1,6 @@
 // src/api/account.ts
 import { Router, Request, Response } from "express";
-import { getAccountById, createAccount, Account } from "../core/account";
+import { getAccountById, createAccount } from "../core/account";
 
 const accountRouter = Router();
 

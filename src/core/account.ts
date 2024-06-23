@@ -3,6 +3,7 @@ import { accountData } from "../data/account";
 export interface Account {
   id?: number;
   documentNumber: string;
+  balance?: number;
 }
 
 export const getAccountById = (id: number): Account => {
