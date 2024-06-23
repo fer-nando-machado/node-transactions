@@ -5,12 +5,20 @@ Sample API for financial transaction management written in Node on an implementa
 ## Commands
 
 ### `npm start`
-Starts the server application locally on port `8080`.
+Starts the server application locally on port `3000`.
 
 ### `npm test`                    
 Executes all available tests.
 
 ## Endpoints
+
+#### `GET /accounts/:accountId` 
+Searches for an account with the provided `:accountId`.
+###### response 
+    {
+        "account_id": 1,
+        "document_number": "12345678900"
+    }
 
 #### `POST /accounts` 
 Creates an account with the provided attributes.
@@ -21,14 +29,6 @@ Creates an account with the provided attributes.
 ###### response 
     {
         "account_id": "1",
-        "document_number": "12345678900"
-    }
-
-#### `GET /accounts/:accountId` 
-Searches for an account with the provided `:accountId`.
-###### response 
-    {
-        "account_id": 1,
         "document_number": "12345678900"
     }
 
