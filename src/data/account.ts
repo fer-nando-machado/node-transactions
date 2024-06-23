@@ -1,8 +1,18 @@
-const mock = [
-  { account_id: 1, document_number: "12345678900" },
-  { account_id: 2, document_number: "98765432100" },
-];
+interface Account {
+  account_id: number;
+  document_number: string;
+}
 
-export const getAccountById = (accountId: number) => {
-  return mock.find((acc) => acc.account_id === accountId);
-};
+class AccountData {
+  private accounts: Account[];
+
+  constructor() {
+    this.accounts = [];
+  }
+
+  public getAccountById(accountId: number): Account | undefined {
+    return this.accounts.find((acc) => acc.account_id === accountId);
+  }
+}
+
+export const accountData = new AccountData();

@@ -2,9 +2,9 @@
 import { Router, Request, Response } from "express";
 import { getAccountById } from "../core/account";
 
-const router = Router();
+const accountRouter = Router();
 
-router.get("/accounts/:accountId", (req: Request, res: Response) => {
+accountRouter.get("/accounts/:accountId", (req: Request, res: Response) => {
   const accountId = parseInt(req.params.accountId, 10);
   try {
     const account = getAccountById(accountId);
@@ -14,4 +14,4 @@ router.get("/accounts/:accountId", (req: Request, res: Response) => {
   }
 });
 
-export default router;
+export default accountRouter;

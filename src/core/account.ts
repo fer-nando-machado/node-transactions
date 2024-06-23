@@ -1,7 +1,7 @@
-import { getAccountById as getAccountByIdFromData } from "../data/account";
+import { accountData } from "../data/account";
 
 export const getAccountById = (accountId: number) => {
-  const account = getAccountByIdFromData(accountId);
+  const account = accountData.getAccountById(accountId);
   if (!account) {
     throw new Error("Account not found");
   }
