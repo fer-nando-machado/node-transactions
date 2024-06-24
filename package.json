@@ -6,7 +6,10 @@
   "scripts": {
     "start": "ts-node src/api/index.ts",
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "docker:start": "npm run docker:build && npm run docker:run",
+    "docker:build": "docker build -t node-transactions .",
+    "docker:run": "docker run -p 3000:3000 node-transactions"
   },
   "repository": {
     "type": "git",

@@ -16,6 +16,10 @@ Starts the server application locally on port `3000`.
 
 Executes all available tests.
 
+### `npm run docker:start`
+
+Starts the server application on Docker on port `3000`.
+
 ## Endpoints
 
 #### `GET /account/:id`
