@@ -22,3 +22,7 @@ export const createTransaction = (transaction: Transaction): Transaction => {
   transaction.date = new Date().toISOString();
   return transactionData.createTransaction(transaction);
 };
+
+export const calculateBalance = (transactions: Transaction[]) => {
+  return transactions.reduce((sum, t) => sum + t.amount, 0);
+};

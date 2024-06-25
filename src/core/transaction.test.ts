@@ -1,4 +1,8 @@
-import { createTransaction, Transaction } from "./transaction";
+import {
+  calculateBalance,
+  createTransaction,
+  Transaction,
+} from "./transaction";
 import { transactionData } from "../data/transaction";
 import { getAccountById } from "./account";
 
@@ -58,5 +62,34 @@ describe("createTransaction", () => {
     expect(createdTransaction).toEqual(expectedTransaction);
     expect(createdTransaction.date).toBeDefined();
     expect(transactionData.createTransaction).toHaveBeenCalledWith(transaction);
+  });
+});
+
+describe("calculateBalance", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("should return total account balance", () => {
+    const transactions = [
+      {
+        id: 1,
+        accountId: 1,
+        amount: 10,
+      },
+      {
+        id: 2,
+        accountId: 1,
+        amount: -20,
+      },
+      {
+        id: 3,
+        accountId: 1,
+        amount: 15,
+      },
+    ];
+
+    const balance = calculateBalance(transactions);
+    expect(balance).toEqual(5);
   });
 });

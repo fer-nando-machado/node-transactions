@@ -1,6 +1,6 @@
 import { accountData } from "../data/account";
 import { transactionData } from "../data/transaction";
-import { Transaction } from "./transaction";
+import { calculateBalance } from "./transaction";
 
 export interface Account {
   id?: number;
@@ -16,10 +16,6 @@ export const getAccountById = (id: number): Account => {
   const transactions = transactionData.getTransactionsByAccountId(id);
   account.balance = calculateBalance(transactions);
   return account;
-};
-
-export const calculateBalance = (transactions: Transaction[]) => {
-  return transactions.reduce((sum, t) => sum + t.amount, 0);
 };
 
 export const createAccount = (account: Account): Account => {

@@ -1,9 +1,4 @@
-import {
-  Account,
-  calculateBalance,
-  createAccount,
-  getAccountById,
-} from "./account";
+import { Account, createAccount, getAccountById } from "./account";
 import { accountData } from "../data/account";
 import { transactionData } from "../data/transaction";
 
@@ -60,35 +55,6 @@ describe("getAccountById", () => {
     expect(() => {
       getAccountById(0);
     }).toThrow("Account not found");
-  });
-});
-
-describe("calculateBalance", () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it("should return account balance", () => {
-    const transactions = [
-      {
-        id: 1,
-        accountId: 1,
-        amount: 100,
-      },
-      {
-        id: 2,
-        accountId: 1,
-        amount: -200,
-      },
-      {
-        id: 3,
-        accountId: 1,
-        amount: 150,
-      },
-    ];
-
-    const balance = calculateBalance(transactions);
-    expect(balance).toEqual(50);
   });
 });
 
