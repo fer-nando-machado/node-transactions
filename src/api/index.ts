@@ -2,7 +2,7 @@ import express from "express";
 import accountRouter from "./account";
 import transactionRouter from "./transaction";
 
-const PORT_API = process.env.PORT_API || 6379;
+const PORT_API = process.env.PORT_API || 3000;
 
 const app = express();
 app.use(express.json());
