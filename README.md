@@ -36,7 +36,7 @@ In order to interact with the queues, make sure you are running [Redis](https://
 docker run -p 6379:6379 -d redis
 ```
 
-## Queues
+## Endpoints
 
 #### `GET /account/:id`
 
