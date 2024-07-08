@@ -12,15 +12,31 @@ Installs application dependencies.
 
 Starts the server application locally on port `3000`.
 
-### `npm test`
-
-Executes all available tests.
-
 ### `npm run docker:start`
 
 Starts the server application on Docker on port `3000`.
 
-## Endpoints
+### `npm test`
+
+Executes all available tests.
+
+### `npm run queue:worker`
+
+Starts a worker on the queues available on port `6379`.
+
+### `npm run queue:producer <queue-name> <json-payload>`
+
+Produces a job to one of the queues available on port `6379`.
+
+## Dependencies
+
+In order to interact with the queues, make sure you are running [Redis](https://redis.io/) either locally or through a Docker container:
+
+```shell
+docker run -p 6379:6379 -d redis
+```
+
+## Queues
 
 #### `GET /account/:id`
 
