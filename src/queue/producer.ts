@@ -11,10 +11,8 @@ async function main() {
     const [targetQueue, payload] = args;
     const queue = queues[targetQueue];
     const json = JSON.parse(payload);
-
     const job = await queue.add(json, jobOptions);
     console.log(`Job #${job.id} sent to '${queue.name}'`, json);
-
     process.exit(0);
   } catch (error: any) {
     console.error("Error producing job:", error.message);
