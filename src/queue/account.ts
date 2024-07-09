@@ -1,10 +1,9 @@
 import Queue from "bull";
 import { Account, createAccount } from "../core/account";
-import { queueOptions } from "./worker";
+import QueueProcessor from "./processor";
+import { queueOptions } from ".";
 
-const accountQueue = new Queue<Account>("account-queue", queueOptions);
-
-accountQueue.process(async (job) => {
+const processor = async (job: Queue.Job<Account>): Promise<void> => {
   try {
     console.log(`Processing job #${job.id}`, job.data);
     const account = createAccount(job.data);
@@ -13,6 +12,10 @@ accountQueue.process(async (job) => {
     console.error(`Error processing job #${job.id}`, error.message);
     throw error;
   }
-});
+};
 
-export default accountQueue;
+export const accountQueue = new QueueProcessor<Account>(
+  "account-queue",
+  queueOptions,
+  processor
+);

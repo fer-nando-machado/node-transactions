@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/api/index.ts",
-    "queue:worker": "ts-node src/queue/worker.ts",
+    "queue:consumer": "ts-node src/queue/consumer.ts",
     "queue:producer": "ts-node src/queue/producer.ts",
     "build": "tsc",
     "test": "jest",

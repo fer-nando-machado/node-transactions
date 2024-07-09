@@ -20,13 +20,13 @@ Starts the server application on Docker on port `3000`.
 
 Executes all available tests.
 
-### `npm run queue:worker`
+### `npm run queue:consumer <queue-name>`
 
-Starts a worker on the queues available on port `6379`.
+Starts consumer for `<queue-name>` at the Redis server running on port `6379`.
 
 ### `npm run queue:producer <queue-name> <json-payload>`
 
-Produces a job to one of the queues available on port `6379`.
+Produces job with `<json-payload>` for `<queue-name>` at the Redis server running on port `6379`.
 
 ## Dependencies
 
