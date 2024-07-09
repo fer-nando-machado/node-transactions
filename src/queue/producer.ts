@@ -1,3 +1,4 @@
+import { error } from "console";
 import { queues, jobOptions } from "./worker";
 
 async function main() {
@@ -10,6 +11,9 @@ async function main() {
   try {
     const [targetQueue, payload] = args;
     const queue = queues[targetQueue];
+    if (!queue) {
+      throw new Error(`'${targetQueue}' is not an active queue`);
+    }
     const json = JSON.parse(payload);
     const job = await queue.add(json, jobOptions);
     console.log(`Job #${job.id} sent to '${queue.name}'`, json);
