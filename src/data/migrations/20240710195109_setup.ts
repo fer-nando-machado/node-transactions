@@ -10,7 +10,7 @@ export async function up(knex: Knex): Promise<void> {
     table.increments("id").primary();
     table.integer("account_id").unsigned().references("id").inTable("account");
     table.double("amount", 14, 2).notNullable();
-    table.timestamp("timestamp").defaultTo(knex.fn.now()).notNullable();
+    table.timestamp("timestamp").notNullable();
   });
 }
 
