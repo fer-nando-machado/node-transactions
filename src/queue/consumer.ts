@@ -10,7 +10,8 @@ async function main() {
   const [name] = args;
   const queue = queues[name];
   if (!queue) {
-    throw new Error(`'${name}' is not an active queue`);
+    console.error(`'${name}' is not an active queue`);
+    process.exit(1);
   }
 
   queue.attachProcessor();
