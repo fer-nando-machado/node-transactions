@@ -74,12 +74,18 @@ The following commands are available:
 
 Starts consumer for `<queue-name>` at the Redis server running on port `6379`.
 
+```ts
+npm run queue:consumer -- "account-queue"
+npm run queue:consumer -- "transaction-queue"
+```
+
 ### `npm run queue:producer <queue-name> <json-payload>`
 
 Produces job with `<json-payload>` for `<queue-name>` at the Redis server running on port `6379`.
 
 ```ts
 npm run queue:producer -- "account-queue" '{"document_number":"12345678900"}'
+npm run queue:producer -- "transaction-queue" '{"account_id": 10, "amount": 7.77}'
 ```
 
 ## Endpoints
