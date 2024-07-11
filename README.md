@@ -95,7 +95,7 @@ Searches for an account with the provided `:id`.
 ```json
 {
   "id": 1,
-  "document_number": "12345678900"
+  "document_number": "12345678900",
   "balance": 123.45
 }
 ```
