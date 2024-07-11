@@ -4,6 +4,8 @@ Sample API for financial transaction management written in Node on an implementa
 
 ## Commands
 
+The following commands are available:
+
 ### `npm install`
 
 Installs application dependencies.
@@ -48,7 +50,7 @@ DB_USERNAME = "node-transactions-username";
 DB_PASSWORD = "node-transactions-password";
 ```
 
-Afterwards, the following commands are available:
+The following commands are available:
 
 ### `npm run migrate`
 
@@ -66,7 +68,7 @@ In order to interact with the queues, make sure you are running [Redis](https://
 docker run -p 6379:6379 -d redis
 ```
 
-Then, the following commands are available:
+The following commands are available:
 
 ### `npm run queue:consumer <queue-name>`
 
