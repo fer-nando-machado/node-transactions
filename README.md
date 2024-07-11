@@ -78,7 +78,7 @@ Starts consumer for `<queue-name>` at the Redis server running on port `6379`.
 
 Produces job with `<json-payload>` for `<queue-name>` at the Redis server running on port `6379`.
 
-```ts
+```json
 npm run queue:producer -- "account-queue" '{"document_number":"12345678900"}'
 ```
 
@@ -90,7 +90,7 @@ npm run queue:producer -- "account-queue" '{"document_number":"12345678900"}'
 
 Searches for an account with the provided `:id`.
 
-response
+**response:**
 
 ```json
 {
@@ -104,7 +104,7 @@ response
 
 Creates an account with the provided attributes.
 
-request
+**request:**
 
 ```json
 {
@@ -112,7 +112,7 @@ request
 }
 ```
 
-response
+**response:**
 
 ```json
 {
@@ -127,7 +127,7 @@ response
 
 Creates a transaction with the provided attributes.
 
-request
+**request:**
 
 ```json
 {
@@ -136,7 +136,7 @@ request
 }
 ```
 
-response
+**response:**
 
 ```json
 {
