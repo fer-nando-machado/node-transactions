@@ -4,23 +4,23 @@ import { calculateBalance } from "./transaction";
 
 export interface Account {
   id?: number;
-  documentNumber: string;
+  document_number: string;
   balance?: number;
 }
 
-export const getAccountById = (id: number): Account => {
-  const account = accountData.getAccountById(id);
+export const getAccountById = async (id: number): Promise<Account> => {
+  const account = await accountData.getAccountById(id);
   if (!account) {
     throw new Error("Account not found");
   }
-  const transactions = transactionData.getTransactionsByAccountId(id);
+  const transactions = await transactionData.getTransactionsByAccountId(id);
   account.balance = calculateBalance(transactions);
   return account;
 };
 
-export const createAccount = (account: Account): Account => {
-  if (!account.documentNumber) {
+export const createAccount = async (account: Account): Promise<Account> => {
+  if (!account.document_number) {
     throw new Error("Account could not be created due to missing document");
   }
-  return accountData.createAccount(account);
+  return await accountData.createAccount(account);
 };

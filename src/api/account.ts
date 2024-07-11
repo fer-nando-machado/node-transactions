@@ -3,19 +3,19 @@ import { getAccountById, createAccount } from "../core/account";
 
 const accountRouter = Router();
 
-accountRouter.get("/account/:accountId", (req: Request, res: Response) => {
-  const accountId = parseInt(req.params.accountId, 10);
+accountRouter.get("/account/:id", async (req: Request, res: Response) => {
   try {
-    const account = getAccountById(accountId);
+    const id = parseInt(req.params.id, 10);
+    const account = await getAccountById(id);
     res.json(account);
   } catch (error: any) {
     res.status(404).json({ error: error.message });
   }
 });
 
-accountRouter.post("/account", (req: Request, res: Response) => {
+accountRouter.post("/account", async (req: Request, res: Response) => {
   try {
-    const account = createAccount({ ...req.body });
+    const account = await createAccount({ ...req.body });
     res.status(201).json(account);
   } catch (error: any) {
     res.status(500).json({ error: error.message });

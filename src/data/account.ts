@@ -1,22 +1,16 @@
 import { Account } from "../core/account";
+import db from ".";
 
 class AccountData {
-  private accounts: Account[];
-  private currentId: number;
-
-  constructor() {
-    this.accounts = [];
-    this.currentId = 0;
+  async getAccountById(id: number): Promise<Account | null> {
+    return db.oneOrNone("SELECT * FROM account WHERE id = $1", [id]);
   }
 
-  public getAccountById(id: number): Account | undefined {
-    return this.accounts.find((acc) => acc.id === id);
-  }
-
-  public createAccount(account: Account): Account {
-    account.id = ++this.currentId;
-    this.accounts.push(account);
-    return account;
+  async createAccount(account: Account): Promise<Account> {
+    return db.one(
+      "INSERT INTO account(document_number) VALUES($1) RETURNING *",
+      [account.document_number]
+    );
   }
 }
 

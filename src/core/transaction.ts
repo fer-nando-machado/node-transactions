@@ -1,26 +1,27 @@
 import { transactionData } from "../data/transaction";
-import { getAccountById } from "./account";
+import { accountData } from "../data/account";
 
 export interface Transaction {
   id?: number;
-  accountId: number;
+  account_id: number;
   amount: number;
-  date?: string;
+  timestamp?: string;
 }
 
-export const createTransaction = (transaction: Transaction): Transaction => {
+export const createTransaction = async (
+  transaction: Transaction
+): Promise<Transaction> => {
   if (!transaction.amount) {
     throw new Error("Transaction could not be created due to missing amount");
   }
 
-  try {
-    getAccountById(transaction.accountId);
-  } catch (error: any) {
+  const account = accountData.getAccountById(transaction.account_id);
+  if (!account) {
     throw new Error("Transaction could not be created due to missing account");
   }
 
-  transaction.date = new Date().toISOString();
-  return transactionData.createTransaction(transaction);
+  transaction.timestamp = new Date().toISOString();
+  return await transactionData.createTransaction(transaction);
 };
 
 export const calculateBalance = (transactions: Transaction[]) => {

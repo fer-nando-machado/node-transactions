@@ -20,6 +20,54 @@ Starts the server application on Docker on port `3000`.
 
 Executes all available tests.
 
+## Database
+
+In order to get the app running, you need to run [Postgres](https://www.postgresql.org/) either locally or through a Docker container:
+
+```ts
+docker run -d -p 5432:5432 --name postgres -e POSTGRES_PASSWORD=password postgres
+```
+
+Access your Postgres instance with the command:
+
+```ts
+docker exec -it postgres psql -U postgres
+```
+
+And run the following instructions to get the database started:
+
+```ts
+CREATE USER "node-transactions-username" WITH PASSWORD 'node-transactions-password';
+CREATE DATABASE "node-transactions" OWNER "node-transactions-username";
+```
+
+Optionally, you can also change the default values of the environment variables and update the script above accordingly.
+
+```ts
+DB_USERNAME = "node-transactions-username";
+DB_PASSWORD = "node-transactions-password";
+```
+
+Afterwards, the following commands are available:
+
+### `npm run migrate`
+
+Runs all pending migrations.
+
+### `npm run migrate:rollback`
+
+Reverts performed migrations.
+
+## Queues
+
+In order to interact with the queues, make sure you are running [Redis](https://redis.io/) either locally or through a Docker container:
+
+```ts
+docker run -p 6379:6379 -d redis
+```
+
+Then, the following commands are available:
+
 ### `npm run queue:consumer <queue-name>`
 
 Starts consumer for `<queue-name>` at the Redis server running on port `6379`.
@@ -28,12 +76,8 @@ Starts consumer for `<queue-name>` at the Redis server running on port `6379`.
 
 Produces job with `<json-payload>` for `<queue-name>` at the Redis server running on port `6379`.
 
-## Dependencies
-
-In order to interact with the queues, make sure you are running [Redis](https://redis.io/) either locally or through a Docker container:
-
-```shell
-docker run -p 6379:6379 -d redis
+```ts
+npm run queue:producer -- "account-queue" '{"document_number":"12345678900"}'
 ```
 
 ## Endpoints
@@ -46,7 +90,7 @@ Searches for an account with the provided `:id`.
 
     {
         "id": 1,
-        "documentNumber": "12345678900"
+        "document_number": "12345678900"
         "balance": 123.45
     }
 
@@ -57,14 +101,14 @@ Creates an account with the provided attributes.
 ###### request
 
     {
-        "documentNumber": "12345678900"
+        "document_number": "12345678900"
     }
 
 ###### response
 
     {
         "id": "1",
-        "documentNumber": "12345678900"
+        "document_number": "12345678900"
     }
 
 #### `POST /transaction`
@@ -74,7 +118,7 @@ Creates a transaction with the provided attributes.
 ###### request
 
     {
-        "accountId": 1,
+        "account_id": 1,
         "amount": 123.45
     }
 
@@ -82,7 +126,7 @@ Creates a transaction with the provided attributes.
 
     {
         "id": 1,
-        "accountId": 1,
+        "account_id": 1,
         "amount": 123.45,
-        "date": "2024-07-12T13:13:13.777Z",
+        "timestamp": "2024-07-12T13:13:13.777Z",
     }

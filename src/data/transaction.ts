@@ -1,22 +1,16 @@
 import { Transaction } from "../core/transaction";
+import db from ".";
 
 class TransactionData {
-  private transactions: Transaction[];
-  private currentId: number;
-
-  constructor() {
-    this.transactions = [];
-    this.currentId = 0;
+  async getTransactionsByAccountId(id: number): Promise<Transaction[]> {
+    return db.any("SELECT * FROM transaction WHERE account_id = $1", [id]);
   }
 
-  public getTransactionsByAccountId(accountId: number): Transaction[] {
-    return this.transactions.filter((t) => t.accountId === accountId);
-  }
-
-  public createTransaction(transaction: Transaction): Transaction {
-    transaction.id = ++this.currentId;
-    this.transactions.push(transaction);
-    return transaction;
+  async createTransaction(transaction: Transaction): Promise<Transaction> {
+    return db.one(
+      "INSERT INTO transaction(account_id, amount, timestamp) VALUES($1, $2, $3) RETURNING *",
+      [transaction.account_id, transaction.amount, transaction.timestamp]
+    );
   }
 }
 

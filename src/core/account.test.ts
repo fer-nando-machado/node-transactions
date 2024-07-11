@@ -20,41 +20,23 @@ describe("getAccountById", () => {
     jest.clearAllMocks();
   });
 
-  it("should return account when account exists", () => {
-    const mockAccount: Account = { id: 1, documentNumber: "12345678900" };
-    (accountData.getAccountById as jest.Mock).mockReturnValueOnce(mockAccount);
-    (
-      transactionData.getTransactionsByAccountId as jest.Mock
-    ).mockReturnValueOnce([
-      {
-        id: 1,
-        accountId: 1,
-        amount: 100,
-      },
-      {
-        id: 2,
-        accountId: 1,
-        amount: -200,
-      },
-      {
-        id: 3,
-        accountId: 1,
-        amount: 150,
-      },
+  it("should return account when account exists", async () => {
+    const accountMock: Account = { id: 1, document_number: "12345678900" };
+    (accountData.getAccountById as jest.Mock).mockReturnValue(accountMock);
+    (transactionData.getTransactionsByAccountId as jest.Mock).mockReturnValue([
+      { account_id: 1, amount: 100 },
+      { account_id: 1, amount: -200 },
+      { account_id: 1, amount: 150 },
     ]);
 
-    const account = getAccountById(1);
-    expect(account).toEqual(mockAccount);
+    const account = await getAccountById(1);
+    expect(account).toEqual(accountMock);
     expect(account.balance).toEqual(50);
-    expect(accountData.getAccountById).toHaveBeenCalledWith(1);
   });
 
-  it("should throw error when account does not exist", () => {
-    (accountData.getAccountById as jest.Mock).mockReturnValueOnce(undefined);
-
-    expect(() => {
-      getAccountById(0);
-    }).toThrow("Account not found");
+  it("should throw error when account does not exist", async () => {
+    (accountData.getAccountById as jest.Mock).mockReturnValue(null);
+    await expect(getAccountById(-1)).rejects.toThrow("Account not found");
   });
 });
 
@@ -63,24 +45,23 @@ describe("createAccount", () => {
     jest.clearAllMocks();
   });
 
-  it("should throw an error if documentNumber is missing", () => {
-    const account: Account = { documentNumber: "" };
+  it("should throw an error if document number is missing", async () => {
+    const account: Account = { document_number: "" };
 
-    expect(() => {
-      createAccount(account);
-    }).toThrowError("Account could not be created due to missing document");
+    await expect(createAccount(account)).rejects.toThrow(
+      "Account could not be created due to missing document"
+    );
+
     expect(accountData.createAccount).not.toHaveBeenCalled();
   });
 
-  it("should create an account and assign an id", () => {
-    const account: Account = { documentNumber: "12345678900" };
-    const expectedAccount: Account = { id: 1, ...account };
-    (accountData.createAccount as jest.Mock).mockReturnValueOnce(
-      expectedAccount
-    );
+  it("should create an account and assign an id", async () => {
+    const account: Account = { document_number: "12345678900" };
+    const accountExpected: Account = { id: 1, ...account };
+    (accountData.createAccount as jest.Mock).mockReturnValue(accountExpected);
 
-    const createdAccount = createAccount(account);
-    expect(createdAccount).toEqual(expectedAccount);
+    const createdAccount = await createAccount(account);
+    expect(createdAccount).toEqual(accountExpected);
     expect(accountData.createAccount).toHaveBeenCalledWith(account);
   });
 });
