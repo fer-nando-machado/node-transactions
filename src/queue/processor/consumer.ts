@@ -1,4 +1,4 @@
-import { queues, queueOptions } from ".";
+import { queues } from "..";
 
 async function main() {
   const args = process.argv.slice(2);

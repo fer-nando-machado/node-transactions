@@ -1,4 +1,4 @@
-import { queues, jobOptions } from ".";
+import { queues, jobOptions } from "..";
 
 async function main() {
   const args = process.argv.slice(2);
