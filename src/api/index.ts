@@ -10,5 +10,5 @@ app.use("/", accountRouter);
 app.use("/", transactionRouter);
 
 app.listen(API_PORT, () => {
-  console.log(`Server is running at http://localhost:${API_PORT}`);
+  console.log(`🌐 Server is running at http://localhost:${API_PORT}`);
 });

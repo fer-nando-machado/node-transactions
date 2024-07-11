@@ -13,5 +13,6 @@ export const connection = {
   password: DB_PASSWORD,
 };
 const db = pgPromise()(connection);
+console.log(`💾 Connected to database at ${DB_HOST}:${DB_PORT}`);
 
 export default db;

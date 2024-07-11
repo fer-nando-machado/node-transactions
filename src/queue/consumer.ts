@@ -15,9 +15,7 @@ async function main() {
   }
 
   queue.attachProcessor();
-  console.log(
-    `Redis is running for '${queue.name}' at ${queueOptions.redis.host}:${queueOptions.redis.port}`
-  );
+  console.log(`📬 Consuming '${queue.name}'`);
 }
 
 main();
