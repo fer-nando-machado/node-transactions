@@ -84,51 +84,65 @@ npm run queue:producer -- "account-queue" '{"document_number":"12345678900"}'
 
 ## Endpoints
 
+### Account
+
 #### `GET /account/:id`
 
 Searches for an account with the provided `:id`.
 
-###### response
+response
 
-    {
-        "id": 1,
-        "document_number": "12345678900"
-        "balance": 123.45
-    }
+```json
+{
+  "id": 1,
+  "document_number": "12345678900"
+  "balance": 123.45
+}
+```
 
 #### `POST /account`
 
 Creates an account with the provided attributes.
 
-###### request
+request
 
-    {
-        "document_number": "12345678900"
-    }
+```json
+{
+  "document_number": "12345678900"
+}
+```
 
-###### response
+response
 
-    {
-        "id": "1",
-        "document_number": "12345678900"
-    }
+```json
+{
+  "id": "1",
+  "document_number": "12345678900"
+}
+```
+
+### Transaction
 
 #### `POST /transaction`
 
 Creates a transaction with the provided attributes.
 
-###### request
+request
 
-    {
-        "account_id": 1,
-        "amount": 123.45
-    }
+```json
+{
+  "account_id": 1,
+  "amount": 123.45
+}
+```
 
-###### response
+response
 
-    {
-        "id": 1,
-        "account_id": 1,
-        "amount": 123.45,
-        "timestamp": "2024-07-12T13:13:13.777Z",
-    }
+```json
+{
+  "id": 1,
+  "account_id": 1,
+  "amount": 123.45,
+  "timestamp": "2024-07-12T13:13:13.777Z"
+}
+```
