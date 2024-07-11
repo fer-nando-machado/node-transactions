@@ -43,7 +43,7 @@ CREATE USER "node-transactions-username" WITH PASSWORD 'node-transactions-passwo
 CREATE DATABASE "node-transactions" OWNER "node-transactions-username";
 ```
 
-Optionally, you can also change the default values of the environment variables and update the script above accordingly.
+Optionally, you can change the values of the environment variables and update the script above accordingly.
 
 ```ts
 DB_USERNAME = "node-transactions-username";
